@@ -34,7 +34,8 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="bi bi-person"></i></span>
                           </div>
-                          <input name="username" type="text" class="form-control" id="input-email" placeholder="请输入账号" />
+                          <input name="username" type="text" class="form-control" id="input-email"
+                            placeholder="请输入账号" />
                         </div>
                       </div>
                       <div class="form-group mb-4">
@@ -43,14 +44,16 @@
                             <label class="form-control-label">密码</label>
                           </div>
                           <div class="mb-2">
-                            <a href="javascript:;" class="small text-muted text-underline--dashed border-primary">忘记密码</a>
+                            <a href="javascript:;"
+                              class="small text-muted text-underline--dashed border-primary">忘记密码</a>
                           </div>
                         </div>
                         <div class="input-group input-group-merge">
                           <div class="input-group-prepend">
                             <span class="input-group-text"><i class="bi bi-key"></i></span>
                           </div>
-                          <input name="password" type="password" class="form-control" id="input-password" placeholder="请输入密码" />
+                          <input name="password" type="password" class="form-control" id="input-password"
+                            placeholder="请输入密码" />
                           <div class="input-group-append">
                             <span class="input-group-text">
                               <a href="javascript:;" data-toggle="password-text" data-target="#input-password">
@@ -68,7 +71,8 @@
                       </div>
                     </form>
                   </div>
-                  <div class="card-footer px-md-5"><small>没有注册？</small> <a href="./register.html" class="small font-weight-bold text-blue">创建账号</a></div>
+                  <div class="card-footer px-md-5"><small>没有注册？</small> <a href="./register.html"
+                      class="small font-weight-bold text-blue">创建账号</a></div>
                 </div>
               </div>
             </div>
@@ -88,6 +92,41 @@
   <script src="./js/common.js"></script>
   <!-- 核心逻辑 -->
   <script src="./js/login.js"></script>
+  <script>
+    console.log(1);
+    const form = document.querySelector('.login-form')
+    document.querySelector('#btn-login').addEventListener('click', async () => {
+      const data = serialize(form, { hash: true, empty: true })
+      console.log(1);
+
+      if (data.username === '') {
+        return showToast('用户名不能为空')
+      }
+      if (data.password === '') {
+        return showToast("密码不能为空")
+      }
+      if (data.username.length < 6) {
+        return showToast('用户名长度太短')
+      }
+      if (data.password.length < 8) {
+        return showToast('密码长度太短')
+      }
+      try {
+        const res = await axios.post('/login', data)
+        const obj = { username: res.data.data.username }
+        localStorage.setItem('usermsg', JSON.stringify(obj))
+        showToast(res.data.message)
+        setTimeout(() => { location.href = './index.html' }, 1000)
+      }
+      catch (err) {
+        showToast(err);
+      }
+
+
+    })
+
+
+  </script>
 </body>
 
 </html>
