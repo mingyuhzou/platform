@@ -10,7 +10,7 @@ function showToast(msg) {
 // 检查token是否存在
 const checkToken = () => {
     const { token } = JSON.parse(localStorage.getItem('usermsg'))
-    console.log(token);
+    // console.log(token);
     if (!token) {
         showToast('请先登录')
         setTimeout(() => { location.href = './login.html' }, 1500)

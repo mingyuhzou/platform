@@ -2,7 +2,7 @@ console.log(1);
 const form = document.querySelector('.login-form')
 document.querySelector('#btn-login').addEventListener('click', async () => {
     const data = serialize(form, { hash: true, empty: true })
-    console.log(1);
+    // console.log(1);
 
     if (data.username === '') {
         return showToast('用户名不能为空')

@@ -263,6 +263,28 @@
 
   <script>
     checkToken()
+    renderUsername()
+    const data = localStorage.getItem('usermsg') ? JSON.parse(localStorage.getItem('usermsg')) : {}
+    const { token } = data
+    console.log(token);
+
+    const getData = async () => {
+      const data = await axios({ url: '/dashboard', method: 'GET', headers: { Authorization: token } })
+      renderOverview(data)
+    }
+    const renderOverview = ({ data: { data: { overview } } }) => {
+      console.log(overview);
+
+      Object.keys(overview).forEach(item => {
+        document.querySelector(`.${item}`).innerHTML = overview[item]
+
+      })
+
+    }
+
+
+
+    getData()
 
 
   </script>
