@@ -18,10 +18,10 @@ document.querySelector('#btn-login').addEventListener('click', async () => {
     }
     try {
         const res = await axios.post('/login', data)
-        const obj = { username: res.data.data.username }
+        const obj = { username: res.data.data.username, token: res.data.data.token }
         localStorage.setItem('usermsg', JSON.stringify(obj))
         showToast(res.data.message)
-        setTimeout(() => { location.href = './index.html' }, 1000)
+        setTimeout(() => { location.href = './index.html' }, 1500)
     }
     catch (err) {
         showToast(err);
