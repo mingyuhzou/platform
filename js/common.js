@@ -15,6 +15,21 @@ const checkToken = () => {
         showToast('请先登录')
         setTimeout(() => { location.href = './login.html' }, 1500)
     }
+}
 
+const renderUsername = () => {
+    const { username } = JSON.parse(localStorage.getItem('usermsg'))
+    if (username) {
+        document.querySelector('.username').innerHTML = username
+    }
+}
 
+const logout = () => {
+    document.querySelector('#logout').addEventListener('click', () => {
+        localStorage.removeItem('usermsg')
+        showToast('退出成功')
+        setTimeout(() => {
+            location.href = './login.html'
+        }, 1500)
+    })
 }
