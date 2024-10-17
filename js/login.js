@@ -16,16 +16,13 @@ document.querySelector('#btn-login').addEventListener('click', async () => {
     if (data.password.length < 8) {
         return showToast('密码长度太短')
     }
-    try {
-        const res = await axios.post('/login', data)
-        const obj = { username: res.data.data.username, token: res.data.data.token }
-        localStorage.setItem('usermsg', JSON.stringify(obj))
-        showToast(res.data.message)
-        setTimeout(() => { location.href = './index.html' }, 1500)
-    }
-    catch (err) {
-        showToast(err);
-    }
+
+    const res = await axios.post('/login', data)
+    const obj = { username: res.data.data.username, token: res.data.data.token }
+    localStorage.setItem('usermsg', JSON.stringify(obj))
+    showToast(res.data.message)
+    setTimeout(() => { location.href = './index.html' }, 1500)
+
 
 
 })

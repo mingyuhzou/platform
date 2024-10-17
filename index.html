@@ -269,24 +269,14 @@
     console.log(token);
 
     const getData = async () => {
-      try {
-        const data = await axios({ url: '/dashboard', method: 'GET', headers: { Authorization: token } })
-        renderOverview(data)
-      } catch (err) {
-        console.log(err);
 
-        if (err.response.status === 401) {
-          showToast('登录失效')
-          localStorage.removeItem('usermsg')
-          setTimeout(() => {
-            location.href = './login.html'
-          }, 1500);
-        }
-      }
+      const data = await axios({ url: '/dashboard', method: 'GET', })
+      renderOverview(data)
 
     }
-    const renderOverview = ({ data: { data: { overview } } }) => {
-      console.log(overview);
+
+
+    const renderOverview = ({ data: { overview } }) => {
 
       Object.keys(overview).forEach(item => {
         document.querySelector(`.${item}`).innerHTML = overview[item]
