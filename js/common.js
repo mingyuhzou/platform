@@ -33,3 +33,16 @@ const logout = () => {
         }, 1500)
     })
 }
+
+// 添加请求拦截器 config是请求的参数
+axios.interceptors.request.use(config => {
+    const token = localStorage.getItem('usermsg') ? JSON.parse(localStorage.getItem('usermsg')).token : ''
+    if (token) {
+        config.headers['Authorization'] = JSON.parse(localStorage.getItem('usermsg')).token
+        console.log(config);
+    }
+    return config
+}, error => {
+    // 对请求错误做些什么
+    return Promise.reject(error);
+});

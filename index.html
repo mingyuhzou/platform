@@ -269,8 +269,21 @@
     console.log(token);
 
     const getData = async () => {
-      const data = await axios({ url: '/dashboard', method: 'GET', headers: { Authorization: token } })
-      renderOverview(data)
+      try {
+        const data = await axios({ url: '/dashboard', method: 'GET', headers: { Authorization: token } })
+        renderOverview(data)
+      } catch (err) {
+        console.log(err);
+
+        if (err.response.status === 401) {
+          showToast('登录失效')
+          localStorage.removeItem('usermsg')
+          setTimeout(() => {
+            location.href = './login.html'
+          }, 1500);
+        }
+      }
+
     }
     const renderOverview = ({ data: { data: { overview } } }) => {
       console.log(overview);
