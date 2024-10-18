@@ -9,7 +9,7 @@ function showToast(msg) {
 
 // 检查token是否存在
 const checkToken = () => {
-    const { token } = JSON.parse(localStorage.getItem('usermsg'))
+    const { token } = localStorage.getItem('usermsg') ? JSON.parse(localStorage.getItem('usermsg')) : ''
     // console.log(token);
     if (!token) {
         showToast('请先登录')
