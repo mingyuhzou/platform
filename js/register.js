@@ -14,7 +14,7 @@ document.querySelector('#btn-register').addEventListener('click', async () => {
         return showToast('密码长度太短')
     }
     const res = await axios.post('/register', data)
-    showToast(res.data.message)
+    showToast(res.message)
     setTimeout(() => { location.href = './login.html' }, 1000)
 
 })

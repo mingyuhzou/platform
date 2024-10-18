@@ -18,7 +18,7 @@ const checkToken = () => {
 }
 
 const renderUsername = () => {
-    const { username } = JSON.parse(localStorage.getItem('usermsg'))
+    const { username } = localStorage.getItem('usermsg') ? JSON.parse(localStorage.getItem('usermsg')) : ''
     if (username) {
         document.querySelector('.username').innerHTML = username
     }
